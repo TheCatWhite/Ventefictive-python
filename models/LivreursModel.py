@@ -74,3 +74,24 @@ class LivreursModel:
             cursor.close()
             ma_connexion.close()
         return None
+
+    def est_occupe(self):
+        ma_connexion = ConnexionBase.creer_connexion()
+        if ma_connexion is None:
+            print("Erreur de connexion à la base de données")
+            return False
+        try:
+            cursor = ma_connexion.cursor()
+            chaine_req = "SELECT COUNT(*) FROM commandes WHERE id_livreur = %s AND est_livre = FALSE"
+            cursor.execute(chaine_req, (self.id_livreur,))
+            row = cursor.fetchone()
+            if row and row[0] > 0:
+                return True
+            else:
+                return False
+        except Exception as e:
+            print(f"Erreur : {e}")
+            return False
+        finally:
+            cursor.close()
+            ma_connexion.close()

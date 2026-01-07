@@ -1,7 +1,8 @@
 import tkinter as tk
 from tkinter import messagebox
 from controllers.LignesCommandesController import LignesCommandesController
-
+import datetime
+from datetime import datetime
 class FactureView(tk.Toplevel): # Toplevel pour ouvrir une fenêtre de reçu
     def __init__(self, id_commande):
         super().__init__()
@@ -26,11 +27,11 @@ class FactureView(tk.Toplevel): # Toplevel pour ouvrir une fenêtre de reçu
         # Construction du design de la facture
         header = f"""
         ================================
-               VENTE FICTIVE SARL
-           123 Rue de l'Informatique
+               VENTE FICTIVE RYAN
+           ESMIA INNOVATION
         ================================
         FACTURE N° : {donnees['id']}
-        DATE       : 07/01/2026
+        DATE       : {datetime.now().strftime("%d/%m/%Y")}
         --------------------------------
         PRODUIT          QTÉ     TOTAL
         --------------------------------\n"""
@@ -40,12 +41,12 @@ class FactureView(tk.Toplevel): # Toplevel pour ouvrir une fenêtre de reçu
             # Formatage des colonnes
             nom = l['nom'][:15].ljust(16)
             qty = str(l['qty']).center(5)
-            st = f"{l['st']:.2f}€".rjust(10)
+            st = f"{l['st']:.2f}ar".rjust(10)
             txt.insert("end", f"{nom} {qty} {st}\n")
 
         footer = f"""
         --------------------------------
-        TOTAL À PAYER :      {donnees['total']:.2f}€
+        TOTAL À PAYER :      {donnees['total']:.2f}Ar
         ================================
            Merci de votre confiance !
         ================================

@@ -116,6 +116,25 @@ class CommandesModel:
         finally:
             cursor.close()
             ma_connexion.close()
+
+    def mark_as_not_delivered(self):
+        ma_connexion = ConnexionBase.creer_connexion()
+        if ma_connexion is None:
+            print("Erreur de connexion à la base de données")
+            return False
+        try:
+            cursor = ma_connexion.cursor()
+            chaine_req = "UPDATE commandes SET est_livre = FALSE WHERE id_commande = %s"
+            cursor.execute(chaine_req, (self.id_commande,))
+            ma_connexion.commit()
+            self.est_livre = False
+            return True
+        except Exception as e:
+            print(f"Erreur lors de la mise à jour du statut de livraison : {e}")
+            return False
+        finally:
+            cursor.close()
+            ma_connexion.close()
             
     def delete(self):
         ma_connexion = ConnexionBase.creer_connexion()
@@ -134,3 +153,27 @@ class CommandesModel:
         finally:
             cursor.close()
             ma_connexion.close()
+            
+    def update(self,id_commandes,id_client,date_commande,est_livre,id_livreur):
+        ma_connexion = ConnexionBase.creer_connexion()
+        if ma_connexion is None:
+            print("Erreur de connexion à la base de données")
+            return False
+        try:
+            cursor = ma_connexion.cursor()
+            chaine_req = "UPDATE commandes SET id_client=%s, date_commande=%s, est_livre=%s, id_livreur=%s WHERE id_commande=%s"
+            cursor.execute(chaine_req, (id_client, date_commande, est_livre, id_livreur, id_commandes))
+            ma_connexion.commit()
+            self.id_client = id_client
+            self.date_commande = date_commande
+            self.est_livre = est_livre
+            self.id_livreur = id_livreur
+            return True
+        except Exception as e:
+            print(f"Erreur lors de la mise à jour de la commande : {e}")
+            return False
+        finally:
+            cursor.close()
+            ma_connexion.close()
+            
+    

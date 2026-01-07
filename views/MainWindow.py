@@ -61,6 +61,3 @@ class MainWindow(tk.Tk):
         # On rafraîchit les données automatiquement à l'ouverture de la vue
         if hasattr(self.current_view, 'charger_donnees'):
             self.current_view.charger_donnees()
-if __name__ == "__main__":
-    app = MainWindow()
-    app.mainloop()

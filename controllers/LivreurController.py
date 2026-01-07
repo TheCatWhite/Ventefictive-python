@@ -28,3 +28,23 @@ class LivreursController:
             print(f"\nContact pour {livreur.nomlivreur} : {livreur.contact_livreur}")
             return True
         return False
+    
+    
+    @staticmethod
+    def livreurs_occupees():
+        livreurs = LivreursController.lister_tous_les_livreurs()
+        livres_occupees = []
+        for livreur in livreurs:
+            if livreur.est_occupe():
+                livres_occupees.append(livreur)
+        return livres_occupees
+    
+    @staticmethod
+    def livreurs_disponibles():
+        livreurs = LivreursController.lister_tous_les_livreurs()
+        livres_disponibles = []
+        for livreur in livreurs:
+            if not livreur.est_occupe():
+                livres_disponibles.append(livreur)
+        return livres_disponibles
+        
