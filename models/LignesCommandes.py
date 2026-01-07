@@ -43,7 +43,7 @@ class LignesCommandes:
             return lignes_commandes
         try:
             cursor = ma_connexion.cursor()
-            chaine_req = "SELECT id_ligne, id_produit, id_commande, quantite FROM lignes_commandes"
+            chaine_req = "SELECT id_ligne, id_produit, id_commande, quantite FROM lignes_commande"
             cursor.execute(chaine_req)
             rows = cursor.fetchall()
             for row in rows:
@@ -70,7 +70,7 @@ class LignesCommandes:
             return None
         try:
             cursor = ma_connexion.cursor()
-            chaine_req = "SELECT id_ligne, id_produit, id_commande, quantite FROM lignes_commandes WHERE id_ligne=%s"
+            chaine_req = "SELECT id_ligne, id_produit, id_commande, quantite FROM lignes_commande WHERE id_ligne=%s"
             cursor.execute(chaine_req,(id,))
             row = cursor.fetchone()
             if row:
@@ -97,7 +97,7 @@ class LignesCommandes:
             return False
         try:
             cursor = ma_connexion.cursor()
-            chaine_req = "INSERT INTO lignes_commandes (id_produit, id_commande, quantite) VALUES (%s, %s, %s)"
+            chaine_req = "INSERT INTO lignes_commande (id_produit, id_commande, quantite) VALUES (%s, %s, %s)"
             cursor.execute(chaine_req, (self.id_produit, self.id_commande, self.quantite))
             ma_connexion.commit()
             self.id_ligne = cursor.lastrowid

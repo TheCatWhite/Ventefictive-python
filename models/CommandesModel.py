@@ -42,7 +42,7 @@ class CommandesModel:
         return f"Commande(id_commande={self.id_commande}, id_client={self.id_client}, date_commande={self.date_commande}, est_livre={self.est_livre}, id_livreur={self.id_livreur})"
     
     
-    
+    @classmethod
     def getall(cls):
         ma_connexion = ConnexionBase.creer_connexion()
         commandes = []

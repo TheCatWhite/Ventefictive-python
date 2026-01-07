@@ -1,8 +1,8 @@
 from config.ConnexionBase import ConnexionBase
 class LivreursModel:
-    def __init__(self,id_livreur,nomlivreur,contact_livreur):
+    def __init__(self,id_livreur,nom_livreur,contact_livreur):
         self.id_livreur = id_livreur
-        self.nomlivreur = nomlivreur
+        self.nom_livreur = nom_livreur
         self.contact_livreur = contact_livreur
     @property
     def id_livreur(self):
@@ -11,11 +11,11 @@ class LivreursModel:
     def id_livreur(self,value):
         self._id_livreur=value
     @property
-    def nomlivreur(self):
-        return self._nomlivreur
-    @nomlivreur.setter
-    def nomlivreur(self,value):
-        self._nomlivreur=value
+    def nom_livreur(self):
+        return self._nom_livreur
+    @nom_livreur.setter
+    def nom_livreur(self,value):
+        self._nom_livreur=value
     @property
     def contact_livreur(self):
         return self._contact_livreur
@@ -34,13 +34,13 @@ class LivreursModel:
             return livreurs
         try:
             cursor = ma_connexion.cursor()
-            chaine_req = "SELECT id_livreur, nomlivreur, contact_livreur FROM livreurs"
+            chaine_req = "SELECT id_livreur, nom_livreur, contact_livreur FROM livreurs"
             cursor.execute(chaine_req)
             rows = cursor.fetchall()
             for row in rows:
                 livreur = LivreursModel(
                     id_livreur=row[0],
-                    nomlivreur=row[1],
+                    nom_livreur=row[1],
                     contact_livreur=row[2]
                 )
                 livreurs.append(livreur)
@@ -59,13 +59,13 @@ class LivreursModel:
             return None
         try:
             cursor = ma_connexion.cursor()
-            chaine_req = "SELECT id_livreur, nomlivreur, contact_livreur FROM livreurs WHERE id_livreur = %s"
+            chaine_req = "SELECT id_livreur, nom_livreur, contact_livreur FROM livreurs WHERE id_livreur = %s"
             cursor.execute(chaine_req, (id,))
             row = cursor.fetchone()
             if row:
                 return cls(
                     id_livreur=row[0],
-                    nomlivreur=row[1],
+                    nom_livreur=row[1],
                     contact_livreur=row[2]
                 )
         except Exception as e:

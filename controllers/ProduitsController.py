@@ -29,7 +29,7 @@ class ProduitsController:
         prod=ProduitsController.lister_tous_les_produits()
         moy=sum(p.stock_produit for p in prod)/len(prod) if prod else 0
         if produit:
-            if produit.stock_produit >= moy:
+            if produit.stock_produit >= 10:
                 print(f"\nStock disponible : {produit.stock_produit} unité(s) de '{produit.nom_produit}'.")
                 return True
             elif produit.stock_produit > 0:
